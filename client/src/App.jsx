@@ -4,16 +4,20 @@ import { useState } from 'react'
 import {io} from "socket.io-client"
 const socket=io("http://localhost:9000")
 function App() {
+  const [currentime,setcurrentTime]=useState([])
+  const time=new Date().toLocaleTimeString('en-US',{hour:"numeric",minute:"numeric" ,hour12:true})
   const [message,setMessage]=useState("")
   const [chat ,setChat]=useState([]);
   const sendMessage=()=>{
-    socket.emit("send_message",message);
+    socket.emit("send_message",{message:message,time:time});
     setMessage("");
   }
 
+
   useEffect(()=>{
     socket.on("receive_message",(data)=>{
-      setChat((prev)=>[...prev,data]);
+      setChat((prev)=>[...prev,data.data]);
+      setcurrentTime((prev)=>[...prev,data.time]);
 
     });
   },[])
@@ -48,6 +52,7 @@ function App() {
               </div>
             ))
           )}
+
         </div>
 
         {/* Input Section */}
@@ -70,6 +75,7 @@ function App() {
 
       </div>
     </div>
+
   </>
   )
 }
