@@ -2,7 +2,7 @@ import React from 'react'
 import { useEffect } from 'react';
 import { useState } from 'react'
 import {io} from "socket.io-client"
-const socket=io("http://localhost:9000")
+const socket=io("https://chat-backend-hvxl.onrender.com")
 function App() {
   const time=new Date().toLocaleTimeString('en-US',{hour:"numeric",minute:"numeric" ,hour12:true})
   const [message,setMessage]=useState("")
