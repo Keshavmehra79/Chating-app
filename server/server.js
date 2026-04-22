@@ -18,9 +18,13 @@ io.on("connection",(socket)=>{
     console.log(`Socket stabliished succefully:${socket.id}`);
     socket.on("send_message",(data)=>{
         console.log(data)
-    io.emit('receive_message',{data:data.message,time:data.time})
+    io.emit('receive_message',{data:data.message,time:data.time,sender:socket.id})
 
-    })    
+    })   
+    
+    socket.on("typing",(data)=>{
+        io.emit('typing',data);
+    })
 })
 
 
