@@ -34,7 +34,7 @@ function App() {
     
     setTimeout(()=>{
       setTyping("");
-    },150000);
+    },1500);
   }
 });
   },[])
