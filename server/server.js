@@ -7,12 +7,16 @@ app.use(cors())
 
 const server=http.createServer(app);
 
-const io=new Server(server,{
-     cors:{
-        origin:'https://chating-app-xi-five.vercel.app/',
-        methods:['GET','POST']
-    }
-})
+
+const io = new Server(server, {
+  cors: {
+    origin: [
+      "http://localhost:5173",
+      "https://chating-app-xi-five.vercel.app"
+    ],
+    methods: ["GET", "POST"]
+  }
+});
 
 io.on("connection",(socket)=>{
     console.log(`Socket stabliished succefully:${socket.id}`);
